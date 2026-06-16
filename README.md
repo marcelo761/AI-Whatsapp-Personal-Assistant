@@ -109,3 +109,7 @@ Os numeros definidos em `ADMIN_NUMBERS` podem usar:
 - `/reset`, `!reset`, `/limpar` ou `!limpar`: limpa o historico da conversa.
 - `/persona nome`: altera a persona do contato atual.
 - `/status` ou `!status`: mostra sessoes ativas e mensagens processadas.
+
+## Crie sua personalidade customizada.
+
+- Para criar sua personalidade customizada, basta ir em /instructions/ e modificar o arquivo custom.txt com as instruções que o modelo deve seguir.
