@@ -109,9 +109,3 @@ Os numeros definidos em `ADMIN_NUMBERS` podem usar:
 - `/reset`, `!reset`, `/limpar` ou `!limpar`: limpa o historico da conversa.
 - `/persona nome`: altera a persona do contato atual.
 - `/status` ou `!status`: mostra sessoes ativas e mensagens processadas.
-
-## Observacoes
-
-- Nunca versione o arquivo `.env`; ele contem segredos.
-- O arquivo `.env.example` deve ficar versionado como referencia.
-- Arquivos `__pycache__`, ambientes virtuais e logs sao ignorados pelo Git.
