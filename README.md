@@ -110,8 +110,6 @@ Os numeros definidos em `ADMIN_NUMBERS` podem usar:
 - `/persona nome`: altera a persona do contato atual.
 - `/status` ou `!status`: mostra sessoes ativas e mensagens processadas.
 
-## Observacoes
+## Crie sua personalidade customizada.
 
-- Nunca versione o arquivo `.env`; ele contem segredos.
-- O arquivo `.env.example` deve ficar versionado como referencia.
-- Arquivos `__pycache__`, ambientes virtuais e logs sao ignorados pelo Git.
+- Para criar sua personalidade customizada, basta ir em /instructions/ e modificar o arquivo custom.txt com as instruções que o modelo deve seguir.
