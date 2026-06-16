@@ -41,9 +41,9 @@ class WhatsMeowGatewayClient:
                 response = await client.post(f"{self._base_url}/send", json=payload)
 
             if response.status_code >= 400:
-                logger.error("WhatsMeow HTTP %s: %s", response.status_code, response.text)
+                logger.error("WhatsMeow HTTP %s while sending message", response.status_code)
                 raise WhatsMeowGatewayError(
-                    f"WhatsMeow returned {response.status_code}: {response.text}",
+                    f"WhatsMeow returned {response.status_code}",
                     response.status_code,
                 )
 
@@ -51,8 +51,8 @@ class WhatsMeowGatewayClient:
         except WhatsMeowGatewayError:
             raise
         except Exception as exc:
-            logger.error("Failed to send message through WhatsMeow: %s", exc)
-            raise WhatsMeowGatewayError(str(exc)) from exc
+            logger.error("Failed to send message through WhatsMeow: %s", type(exc).__name__)
+            raise WhatsMeowGatewayError("Failed to send message through WhatsMeow") from exc
 
     async def send_presence(self, number: str, *, delay_ms: int = 5000) -> None:
         payload = {"number": number}
@@ -60,7 +60,7 @@ class WhatsMeowGatewayClient:
             async with httpx.AsyncClient(timeout=5.0) as client:
                 await client.post(f"{self._base_url}/presence", json=payload)
         except Exception:
-            logger.debug("Presence is temporarily unavailable in the Go gateway for %s", number)
+            logger.debug("Presence is temporarily unavailable in the Go gateway")
 
     async def check_connection(self) -> bool:
         """Return whether the Go gateway is responding."""

@@ -57,7 +57,7 @@ async def whatsmeow_webhook(
         logger.warning("Invalid webhook payload: %s", exc)
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid JSON") from exc
 
-    logger.debug("Webhook payload received: %s", payload)
+    logger.debug("Webhook payload received")
     return await _handle_payload(payload, request, background_tasks)
 
 
