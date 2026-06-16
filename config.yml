@@ -1,0 +1,26 @@
+API_BASE_URL: https://api.groq.com/openai/v1/
+INTERNET_ACCESS: true
+MAX_SEARCH_RESULTS: 4
+MODEL_ID: meta-llama/llama-4-scout-17b-16e-instruct
+MAX_HISTORY: 8
+AI_NSFW_CONTENT_FILTER: true
+LANGUAGE: pt
+DEFAULT_INSTRUCTION: luna
+ALLOW_GROUPS: false
+TRIGGER:
+  - chatbot
+  - suporte
+  - assistente
+BLACKLIST_WORDS:
+  - naked
+  - loli
+  - hentai
+  - explicit
+  - pornography
+  - adult
+  - XXX
+  - sex
+  - erotic
+WHATSAPP:
+  MAX_MESSAGE_LENGTH: 4096
+  TYPING_DELAY_MS: 5000

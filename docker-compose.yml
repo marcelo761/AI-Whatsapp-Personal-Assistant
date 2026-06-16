@@ -1,0 +1,40 @@
+name: ai-whatsapp-personal-assistant
+
+services:
+  whatsapp_gateway:
+    image: golang:1.25-alpine
+    container_name: whatsapp-gateway-go
+    working_dir: /go/src/app
+    command: sh -c "apk add --no-cache gcc musl-dev sqlite-dev git && go mod tidy && go run main.go"
+    restart: unless-stopped
+    environment:
+      PYTHON_WEBHOOK_URL: http://chatbot:8000/webhook/whatsmeow
+      WEBHOOK_SECRET: ${WEBHOOK_SECRET:-}
+      WHATSAPP_INSTANCE: ${WHATSAPP_INSTANCE:-personal-assistant}
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./gateway_go:/go/src/app
+
+  chatbot:
+    build: .
+    container_name: ai-whatsapp-personal-assistant
+    restart: unless-stopped
+    depends_on:
+      - whatsapp_gateway
+    ports:
+      - "${PORT:-8000}:8000"
+    env_file:
+      - .env
+    environment:
+      WHATSAPP_GATEWAY_URL: http://whatsapp_gateway:3000
+    volumes:
+      - ./config.yml:/app/config.yml
+      - ./contacts.json:/app/contacts.json
+      - ./instructions:/app/instructions
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
