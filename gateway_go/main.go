@@ -178,7 +178,9 @@ func presenceHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	dbLog := waLog.Stdout("Database", "DEBUG", true)
+	logLevel := envOrDefault("LOG_LEVEL", "INFO")
+
+	dbLog := waLog.Stdout("Database", logLevel, true)
 	container, err := sqlstore.New(context.Background(), "sqlite3", "file:whatsmeow_session.db?_foreign_keys=on", dbLog)
 	if err != nil {
 		panic(err)
@@ -189,7 +191,7 @@ func main() {
 		panic(err)
 	}
 
-	clientLog := waLog.Stdout("Client", "DEBUG", true)
+	clientLog := waLog.Stdout("Client", logLevel, true)
 	waClient = whatsmeow.NewClient(deviceStore, clientLog)
 	waClient.AddEventHandler(waEventHandler)
 
